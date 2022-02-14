@@ -1,5 +1,5 @@
 ---
-- name: Ensure devops user on all nodes
+- name: Ensure devops user on control node
   user:
     name: "{{ user._name | default('devops')}}"
     shell: /bin/bash
@@ -15,3 +15,47 @@
   loop: "{{ user }}"
   loop_control:
     loop_var: user
+
+- name: Adding user "{{ user._name }}" to Sudo configuration on frontend, database and app servers
+  copy:
+    content: "{{user._name}}  ALL=(ALL) NOPASSWD:ALL"
+    dest: "/etc/sudoers.d/{{ user._name }}_service_account"
+  when: "ansible_hostname not in 'control'"
+
+- name: Disabling SSH root user login.
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin yes"
+    replace: "^PermitRootLogin no"
+    validate: sshd -t
+  notify: restart_sshd
+  when: "ansible_hostname not in 'control'"
+
+- name: Disabling SSH Password Based Authentication
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication yes"
+    replace: "^PasswordAuthentication no"
+    validate: sshd -t
+  notify: restart_sshd
+  when: "ansible_hostname not in 'control'"
+
+- name: Acquiring DNS seerver IP "listen_addresses
+  shell: "ip a s eth0 | grep 'inet[[:space:]]' | awk '{print $2}' | awk -F'/' '{print $1}'"
+  register: _dns_nameserver_ip
+  when: "ansible_hostname == 'control'"
+
+- name: Configure DNS on hosts
+  lineinfile:
+    path: "/etc/sysconfig/network-scripts/ifcfg-eth0"
+    line: "{{ item }}"
+    #regexp: "{{ item._regexp }}"
+  loop:
+    - "PEERDNS=no"
+    - "DNS1={{ _dns_nameserver_ip }}"
+  when: "ansible_hostname != 'control'"
+  register: _dns_configured
+
+- name: Effecting DNS Configuration
+  notify: restart_network_manager
+  when: _dns_configured.changed | bool

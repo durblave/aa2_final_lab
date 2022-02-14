@@ -1,0 +1,22 @@
+# Change User and IdentityFile(s) as necessary
+#
+
+Host control
+  Hostname bastion.d1a1.example.opentlc.com
+  User {{ user._name }}
+
+Host *.internal
+  User ec2-user
+  ProxyJump control
+
+Match User {{ user._name }}
+  IdentityFile ~/.ssh/ocpkey.pem
+
+Match User ec2-user
+  IdentityFile ~/.ssh/3tier-00key.pem
+
+Host *
+  ControlMaster auto
+  ControlPath /tmp/%h-%r
+  ControlPersist 5m
+  StrictHostKeyChecking no

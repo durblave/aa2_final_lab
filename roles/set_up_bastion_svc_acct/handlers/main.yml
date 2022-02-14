@@ -1,0 +1,14 @@
+---
+- name: restart_sshd
+  service:
+    name: sshd
+    state: restarted
+
+- name: restart_network_manager
+  service:
+    name: NetworkManager
+    state: restarted
+
+
+
+
