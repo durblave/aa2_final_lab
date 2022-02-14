@@ -1,0 +1,3 @@
+katello_package: "http://satellite.example.com/pub/katello-ca-consumer-latest.noarch.rpm"
+satellite_key: "gpte-labs-rhel8"
+satellite_org: "prod"
