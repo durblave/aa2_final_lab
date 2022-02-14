@@ -1,0 +1,17 @@
+---
+# roles/install_postgressql/handlers/main.yml
+
+- name: start_postgres
+  service:
+    name: "{{ postgres_service }}"
+    state: started
+
+- name: restart_postgres
+  service:
+    name: "{{ postgres_service }}"
+    state: restarted
+
+- name: enable_postgres
+  service:
+    name: "{{ postgres_service }}"
+    enabled: true
