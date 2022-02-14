@@ -1,0 +1,14 @@
+---
+- name: 5.1 Setup COntrol hosts
+  hosts: all
+  gather_facts: false
+  become: true
+
+  roles:
+    - role: set_up_bastion_svc_acct
+      vars:
+        user:
+          _name:
+          _id:
+          _passwd:
+      when: "ansble_hostname in 'control'"

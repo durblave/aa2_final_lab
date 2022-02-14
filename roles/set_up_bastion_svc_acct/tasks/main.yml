@@ -1,0 +1,17 @@
+---
+- name: Ensure devops user on all nodes
+  user:
+    name: "{{ user._name | default('devops')}}"
+    shell: /bin/bash
+    #groups:
+    uid: "{{ user._id | default('1002') }}"
+    comment: "DevOps Automation Service Account"
+    generate_ssh_key: yes
+    ssh_key_bits: "{{ ssh_key_bits | default('4096') }}"
+    ssh_key_file: .ssh/id_rsa
+    password: "{{ user._passwd | default('$6$CXQp3tNaViAe0WDG$K/.CEzpzkBqL1UAqXwDddvP5CvmAkBohmy.IB47XqiosBu2tB31bPOWdTqn8xQ5hAP/V4ExJxXVXrd0U1QKlp0')}}" # encrypted password default is redhat
+    update_password: always
+    state: present
+  loop: "{{ user }}"
+  loop_control:
+    loop_var: user

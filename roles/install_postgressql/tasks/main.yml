@@ -2,7 +2,11 @@
 
 # roles/install_postgressql/tasks/main.yml
 
-include_tasks: roles/install_postgressql/tasks/install_initialise_pg.yml
+- name: Install PostgreSQL 12
+  include_tasks: install_initialise_pg.yml
+
+- name: Configure PostgreSQL 12
+  include_tasks: configure.yml
 
 
 # - name: Install Postgres packages
