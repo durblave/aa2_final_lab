@@ -4,6 +4,7 @@
   gather_facts: false
   become: true
 
+
   roles:
     - role: set_up_bastion_svc_acct
       vars:

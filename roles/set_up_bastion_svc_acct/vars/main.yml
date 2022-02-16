@@ -1,0 +1,5 @@
+user:
+  - _name: devops #service account for devops automation on all nodes
+    _id: 1002 # user id to be used on all nodes
+    _passwd: $6$CXQp3tNaViAe0WDG$K/.CEzpzkBqL1UAqXwDddvP5CvmAkBohmy.IB47XqiosBu2tB31bPOWdTqn8xQ5hAP/V4ExJxXVXrd0U1QKlp0 #Encrypted password
+    _ssh_key_bits: 4096 # SSH Key encryption bits
