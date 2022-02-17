@@ -17,7 +17,7 @@
         state: directory
       loop:
         - "{{ HOME }}/.config"
-        - "{{ $HOME }}/.config/openstack"
+        - "{{ HOME }}/.config/openstack"
       loop_control:
         loop_var: __directory
       
