@@ -14,19 +14,19 @@
   environment:
     OS_CLOUD: "d1a1-project"
   #pre_tasks:
-  tasks:
-    - name: Ping hosts
-      ping:
+  # tasks:
+  #   - name: Ping hosts
+  #     ping:
 
-    - name: Check hostname
-      shell: "hostname -a"
+  #   - name: Check hostname
+  #     shell: "hostname -a"
 
-    - name: Who Am I
-      shell: "whoami"
+  #   - name: Who Am I
+  #     shell: "whoami"
 
-    - name: Checking host ipaddress
-      shell: "ip add"
+  #   - name: Checking host ipaddress
+  #     shell: "ip add"
 
-  # roles:
-  #   - role: prep_node_for_osp
+  roles:
+    - role: prep_node_for_osp
     
