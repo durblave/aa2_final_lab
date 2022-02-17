@@ -1,7 +1,7 @@
 ---
 
 - name: Prepare Node for OpenStack Cloud
-  yum:
+  dnf:
     name: "{{ app }}"
     state: present
   loop:
