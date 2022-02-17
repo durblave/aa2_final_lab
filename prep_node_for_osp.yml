@@ -9,11 +9,12 @@
   vars:
     #GUID: "{{ lookup('ENV','GUID') }}"
     GUID: "d1a1"
-    HOME: "{{ lookup('ENV','HOME') }}"
+    HOME: "/home/devops"
 
   environment:
-    OS_CLOUD: "{{ GUID }}-project"
-  pre_tasks:
+    OS_CLOUD: "d1a1-project"
+  #pre_tasks:
+  tasks:
     - name: Ping hosts
       ping:
 
