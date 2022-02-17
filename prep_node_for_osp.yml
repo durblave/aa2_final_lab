@@ -1,6 +1,7 @@
 ---
 - name: Initial Cloud Setup
   hosts: localhost
+  beccome: true
   gather_facts: yes
 
   vars:
