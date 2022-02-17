@@ -1,4 +1,4 @@
 ---
-guid: "{{ lookup('ENV','GUID') }}"
-home: "{{ lookup('ENV','HOME') }}"
+GUID: "{{ lookup('ENV','GUID') }}"
+HOME: "{{ lookup('ENV','HOME') }}"
 internal_domain: "{{ lookup('ENV','GUID') }}.internal"

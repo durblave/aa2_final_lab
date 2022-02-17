@@ -3,7 +3,6 @@
   user:
     name: "{{ user._name | default('devops')}}"
     shell: /bin/bash
-    #groups:
     uid: "{{ user._id | default('1002') }}"
     comment: "DevOps Automation Service Account"
     generate_ssh_key: yes
@@ -49,7 +48,6 @@
   lineinfile:
     path: "/etc/sysconfig/network-scripts/ifcfg-eth0"
     line: "{{ item }}"
-    #regexp: "{{ item._regexp }}"
   loop:
     - "PEERDNS=no"
     - "DNS1={{ _dns_nameserver_ip }}"

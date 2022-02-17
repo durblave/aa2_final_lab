@@ -1,0 +1,40 @@
+---
+
+- name: Prepare Node for OpenStack Cloud
+  yum:
+    name: "{{ app }}"
+    state: present
+  loop:
+    - python3-openstackclient
+    - python3-openstacksdk
+  loop_control:
+    loop_var: app
+
+- name: Configure OpenStack Auth Information
+  block:
+    - file:
+        path: "{{ __directory }}"
+        state: directory
+      loop:
+        - "{{ HOME }}/.config"
+        - "{{ $HOME }}/.config/openstack"
+      loop_control:
+        loop_var: __directory
+      
+    - template:
+        src: clouds.yml.j2
+        dest: "{{ HOME }}/.config/openstack/clouds.yaml"
+
+- name: Verify OpenStack Cloud Connectivity
+  block:
+    - os_auth:
+        cloud: "{{ GUID }}-project"
+      register: connection_success
+
+    - debug:
+        msg: "Connection failed"
+      when: not connection_success | bool
+
+    - debug:
+        msg: "Connection successfull"
+      when: connection_success | bool

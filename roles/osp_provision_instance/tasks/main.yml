@@ -1,6 +1,6 @@
 ---
 
-- name: Creating Instance
+- name: Creating OpenStack Instance
   openstack.cloud.server:
     cloud: "{{ guid }}-project"
     name: "{{ instance.name }}"
