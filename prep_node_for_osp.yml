@@ -10,7 +10,13 @@
 
   environment:
     OS_CLOUD: "{{ lookup('ENV','GUID') }}-project"
+  pre_tasks:
+    - name: Check hostname
+      shell: "hostname -a"
 
+    - name: Checking host ipaddress
+      shell: "ip add"
+      
   roles:
     - role: prep_node_for_osp
     
