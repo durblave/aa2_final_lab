@@ -1,6 +1,8 @@
 # [tower]
 # tower ansible_ssh_host=towerfl.example.com
 
+localhost
+
 [load_balancers]
 frontend1  ansible_ssh_host=frontend1."{{ GUID }}".internal
 
