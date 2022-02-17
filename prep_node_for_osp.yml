@@ -21,6 +21,9 @@
     - name: Check hostname
       shell: "hostname -a"
 
+    - name: Who Am I
+      shell: "whoami"
+
     - name: Checking host ipaddress
       shell: "ip add"
 
