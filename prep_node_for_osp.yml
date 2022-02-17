@@ -11,5 +11,5 @@
     OS_CLOUD: "{{ lookup('ENV','GUID') }}-project"
 
   roles:
-    - role: osp_configure_instance
+    - role: prep_node_for_osp
     
