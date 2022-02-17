@@ -2,7 +2,7 @@
 - name: Initial Cloud Setup
   hosts: localhost
   become: true
-  gather_facts: yes
+  gather_facts: no
 
   vars:
     GUID: "{{ lookup('ENV','GUID') }}"
