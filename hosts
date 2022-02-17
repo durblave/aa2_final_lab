@@ -1,3 +1,8 @@
+[towers]
+tower1 ansible_ssh_host=tower1.example.com
+tower2 ansible_ssh_host=tower2.example.com
+tower2 ansible_ssh_host=tower3.example.com
+
 [load_balancers]
 frontend1  ansible_ssh_host=frontend1."{{ GUID }}".internal
 

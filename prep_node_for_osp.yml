@@ -1,6 +1,7 @@
 ---
 - name: Initial Cloud Setup
-  hosts: localhost
+  hosts: towers
+  #hosts: localhost
   #become: true
   gather_facts: no
 
@@ -11,12 +12,15 @@
   environment:
     OS_CLOUD: "{{ lookup('ENV','GUID') }}-project"
   pre_tasks:
+    - name: Ping hosts
+      ping:
+
     - name: Check hostname
       shell: "hostname -a"
 
     - name: Checking host ipaddress
       shell: "ip add"
-      
+
   roles:
     - role: prep_node_for_osp
     
