@@ -27,14 +27,17 @@
 
 - name: Verify OpenStack Cloud Connectivity
   block:
-    - os_auth:
+    - name: Get Auth details
+      os_auth:
         cloud: "{{ GUID }}-project"
       register: connection_success
 
-    - debug:
+    - name: Test Connectivity
+      debug:
         msg: "Connection failed"
       when: not connection_success | bool
 
-    - debug:
+    - name: Test Connectivity
+      debug:
         msg: "Connection successfull"
       when: connection_success | bool
